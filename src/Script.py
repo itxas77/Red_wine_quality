@@ -54,24 +54,3 @@ plt.show()
 with open("random_forest_final.pkl", "wb") as f:
     pickle.dump(best_rf, f)
 
-
-xgb_model = xgb.XGBClassifier(objective="multi:softprob",num_class=len(le.classes_),eval_metric="mlogloss",learning_rate=0.05,max_depth=8,n_estimators=300,random_state=11,n_jobs=-1)
-
-xgb_model.fit(X_train, y_train)
-y_pred_xgb = xgb_model.predict(X_test)
-
-print("\n=== XGBOOST ===")
-print("Accuracy:", accuracy_score(y_test, y_pred_xgb))
-
-
-ConfusionMatrixDisplay.from_predictions(y_test,y_pred_xgb,display_labels=target_names,xticks_rotation=45)
-plt.title("Confusion Matrix – XGBoost")
-plt.tight_layout()
-plt.show()
-
-with open("xgboost_final.pkl", "wb") as f:
-    pickle.dump(
-        {
-            "model": xgb_model,
-            "label_encoder": le,
-            "class_mapping": class_mapping},f)
