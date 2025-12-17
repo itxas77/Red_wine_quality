@@ -1,31 +1,20 @@
-# =========================================================
-# Pipeline completo: Entrenamiento XGBoost + SMOTE + Predicción
-# =========================================================
-
 import pickle
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import accuracy_score, classification_report
-
 from imblearn.over_sampling import SMOTE
-
 import xgboost as xgb
 
-# =========================================================
-# 1. Carga de datos
-# =========================================================
+
 df = pd.read_csv("winequality-red.csv")
 
 X = df.drop(columns=["quality"])
 y = df["quality"]
 
-# =========================================================
-# 2. Label Encoding
-# =========================================================
+
 le = LabelEncoder()
 y_encoded = le.fit_transform(y)
 
